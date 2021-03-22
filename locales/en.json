@@ -1,0 +1,6 @@
+{
+  "errors": {
+    "InternalServer": "Something went wrong. Please try again.",
+    "RouteNotFound": "Route not found"
+  }
+}

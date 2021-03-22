@@ -1,0 +1,6 @@
+{
+  "errors": {
+    "InternalServer": "Hemos sufrido un error inesperado, por favor, intenta de nuevo.",
+    "RouteNotFound": "Ruta no existe"
+  }
+}

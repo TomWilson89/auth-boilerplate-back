@@ -7,6 +7,10 @@ import helmet = require('helmet');
 
 require('./config/database');
 
+import errorMiddleware from './middlewares/error';
+import RouteNotFound from './errors/routeNotFound';
+import routes from './routes';
+
 class App {
   public app = express();
 
@@ -29,6 +33,14 @@ class App {
     this.app.use(hpp());
     this.app.use(mongoSanitize());
     this.app.use(helmet());
+
+    this.app.use(routes);
+
+    this.app.use((req, res, next) => {
+      next(new RouteNotFound());
+    });
+
+    this.app.use(errorMiddleware);
   }
 }
 
