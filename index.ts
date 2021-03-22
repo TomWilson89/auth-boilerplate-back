@@ -5,6 +5,8 @@ import mongoSanitize = require('express-mongo-sanitize');
 import hpp = require('hpp');
 import helmet = require('helmet');
 
+require('./config/database');
+
 class App {
   public app = express();
 
