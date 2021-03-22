@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": ["es2017", "esnext.asynciterable", "es2020.string"],
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"],
+    "outDir": "./build",
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules"]
+}
