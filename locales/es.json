@@ -1,6 +1,15 @@
 {
   "errors": {
     "InternalServer": "Hemos sufrido un error inesperado, por favor, intenta de nuevo.",
-    "RouteNotFound": "Ruta no existe"
+    "RouteNotFound": "Ruta no existe",
+    "FieldIsRequired": "Campo {{field}} es requerido",
+    "FieldIsNotValid": "Campo {{field}} no es válido",
+    "FieldIsTooLong": "Campo {{field}} excede límit máximo permitido: {{limit}}",
+    "FieldIsTooShort": "Campo {{field}} excede el límit mínimo permitido: {{limit}}",
+    "InvalidCredentials": "Credenciales invalidas",
+    "DuplicatedField": "{{field}} ya existe",
+    "UserAlreadyExists": "Usuario ya existe",
+    "InvalidToken": "Invalid token",
+    "TokenExpired": "Token expirado, por favor registrate nuevamente"
   }
 }
