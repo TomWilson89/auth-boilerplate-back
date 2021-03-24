@@ -36,9 +36,7 @@ class App {
 
     this.app.use(routes);
 
-    this.app.use((req, res, next) => {
-      next(new RouteNotFound());
-    });
+    this.app.use((req, res, next) => next(new RouteNotFound()));
 
     this.app.use(errorMiddleware);
   }
