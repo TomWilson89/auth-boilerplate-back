@@ -61,6 +61,8 @@ const schema = new Schema<IUserDocument>(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
 
+schema.index({ email: 1 });
+
 schema.pre<IUserDocument>('save', async function (next: NextFunction) {
   if (this.isNew) {
     this.createdAt = new Date();

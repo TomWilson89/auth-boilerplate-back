@@ -30,7 +30,7 @@ class AuthValidationClass {
       errors.push(new HttpError('FieldIsTooShort', 422, { field: 'name', limit: '2' }));
     }
 
-    if (body.password && body.password.length > 32) {
+    if (body.name && body.name.length > 32) {
       errors.push(new HttpError('FieldIsTooLong', 422, { field: 'name', limit: '32' }));
     }
 

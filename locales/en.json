@@ -10,6 +10,8 @@
     "DuplicatedField": "{{field}} already been taken",
     "UserAlreadyExists": "User already exists",
     "InvalidToken": "Invalid token",
-    "TokenExpired": "Token expired, please signup again"
+    "TokenExpired": "Token expired, please signup again",
+    "UserDoNotExists": "User does not exists",
+    "NotAuthorized": "Not Authorized"
   }
 }

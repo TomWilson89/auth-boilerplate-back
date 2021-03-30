@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt = require('jsonwebtoken');
 import crypto = require('crypto');
+import axios from 'axios';
+import { OAuth2Client } from 'google-auth-library';
 
 import asyncHandler from '../../middlewares/async';
 import User from '../user/user.model';
@@ -13,6 +15,8 @@ import InternalServerError from '../../errors/internalServer';
 
 class AuthControllerClass {
   private validParams: (keyof IUSer)[] = ['email', 'name', 'password'];
+
+  private client = new OAuth2Client(config.google.CLIENT_ID);
 
   private sendToken = (user: IUserDocument, status: number, res: Response) => {
     const token = user.getToken();
@@ -36,7 +40,7 @@ class AuthControllerClass {
         email,
         {
           subject: 'Activate your Account',
-          link: `http://localhost:3000/auth/${token}`,
+          link: `${config.client.URL}/activate/${token}`,
         },
         res,
       );
@@ -83,19 +87,86 @@ class AuthControllerClass {
     this.sendToken(user, 200, res);
   };
 
+  public googleLogin = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { idToken } = req.body;
+
+    try {
+      const response = await this.client.verifyIdToken({
+        idToken,
+        audience: config.google.CLIENT_ID,
+      });
+
+      const { email, email_verified, name } = response.getPayload();
+
+      if (email_verified) {
+        const user = await User.findOne({ email });
+
+        if (user) {
+          return this.sendToken(user, 200, res);
+        } else {
+          let password = await crypto.randomBytes(48).toString('hex');
+
+          const newUser = new User(
+            buildParams<IUSer>(this.validParams, { email, name, password }),
+          );
+
+          await newUser.save();
+
+          return this.sendToken(newUser, 201, res);
+        }
+      } else {
+        return next(new InternalServerError());
+      }
+    } catch (error) {
+      console.error('error', error);
+      return next(new InternalServerError());
+    }
+  });
+
+  public facebookLogin = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { userID, accessToken } = req.body;
+
+    const url = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
+
+    try {
+      const {
+        data: { name, email },
+      } = await axios.get(url);
+
+      const user = await User.findOne({ email });
+
+      if (user) {
+        return this.sendToken(user, 200, res);
+      } else {
+        let password = await crypto.randomBytes(48).toString('hex');
+
+        const newUser = new User(
+          buildParams<IUSer>(this.validParams, { email, name, password }),
+        );
+
+        await newUser.save();
+
+        return this.sendToken(newUser, 201, res);
+      }
+    } catch (error) {
+      console.error('error', error);
+      return next(new InternalServerError());
+    }
+  });
+
   public forgotPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) {
-      return next(new HttpError('InvalidCredentials', 422));
+      return next(new HttpError('UserDoNotExists', 422));
     }
 
     const resetToken = user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false, validateModifiedOnly: true });
 
-    const resetUrl = `${config.client.url}/reset-password/${resetToken}`;
+    const resetUrl = `${config.client.URL}/reset/${resetToken}`;
 
     try {
       await Mailer.forgotPassword(email, { link: resetUrl, subject: 'Forgot password' }, res);

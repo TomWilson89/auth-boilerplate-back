@@ -10,6 +10,8 @@
     "DuplicatedField": "{{field}} ya existe",
     "UserAlreadyExists": "Usuario ya existe",
     "InvalidToken": "Invalid token",
-    "TokenExpired": "Token expirado, por favor registrate nuevamente"
+    "TokenExpired": "Token expirado, por favor registrate nuevamente",
+    "UserDoNotExists": "El usuario no existe",
+    "NotAuthorized": "No Autorizado"
   }
 }

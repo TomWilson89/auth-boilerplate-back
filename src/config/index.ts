@@ -33,6 +33,10 @@ export default {
   },
 
   client: {
-    url: process.env.CLIENT_URL,
+    URL: process.env.CLIENT_URL,
+  },
+
+  google: {
+    CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   },
 };

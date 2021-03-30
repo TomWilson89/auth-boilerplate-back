@@ -41,7 +41,7 @@ class Mailer {
 
       await sgMail.send(options);
       res.json({
-        data: `Email sent to ${email}, please follow the instructions to acivate your account`,
+        data: `Email sent to ${email}, please follow the instructions to reset your password`,
       });
     } catch (error) {
       console.log('Error sending email: ', error.response.body);
