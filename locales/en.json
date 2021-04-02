@@ -1,0 +1,17 @@
+{
+  "errors": {
+    "InternalServer": "Something went wrong. Please try again.",
+    "RouteNotFound": "Route not found",
+    "FieldIsRequired": "Field {{field}} is required",
+    "FieldIsNotValid": "Field {{field}} is not valid",
+    "FieldIsTooLong": "Field {{field}} exceeds maximum allowed limit: {{limit}}",
+    "FieldIsTooShort": "Field {{field}} exceeds minimum allowed limit: {{limit}}",
+    "InvalidCredentials": "Invalid credentials",
+    "DuplicatedField": "{{field}} already been taken",
+    "UserAlreadyExists": "User already exists",
+    "InvalidToken": "Invalid token",
+    "TokenExpired": "Token expired, please signup again",
+    "UserDoNotExists": "User does not exists",
+    "NotAuthorized": "Not Authorized"
+  }
+}
