@@ -1,0 +1,1 @@
+{"version":3,"file":"routeNotFound.js","sourceRoot":"","sources":["../../../src/errors/routeNotFound.ts"],"names":[],"mappings":";;AAAA,iCAA+B;AAE/B,MAAM,aAAc,SAAQ,cAAS;IACnC,YAAY,MAAM,GAAG,EAAE;QACrB,KAAK,CAAC,eAAe,EAAE,GAAG,EAAE,MAAM,CAAC,CAAC;IACtC,CAAC;CACF;AAED,kBAAe,aAAa,CAAC"}
