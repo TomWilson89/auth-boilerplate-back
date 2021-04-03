@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "12.16.1"
+  },
   "scripts": {
-    "start": "ts-node index.ts",
-    "dev": "nodemon index.ts"
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts",
+    "postinstall": "tsc -w",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
