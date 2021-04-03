@@ -3,6 +3,7 @@
     "alwaysStrict": true,
     "sourceMap": true,
     "removeComments": true,
+    "skipLibCheck": true,
     "target": "es2017",
     "module": "commonjs",
     "lib": ["es2017", "esnext.asynciterable", "es2020.string"],
