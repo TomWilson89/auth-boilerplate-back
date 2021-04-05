@@ -149,7 +149,7 @@ class AuthControllerClass {
         return this.sendToken(newUser, 201, res);
       }
     } catch (error) {
-      console.error('error', error);
+      console.error('error', error.response.data.error);
       return next(new InternalServerError());
     }
   });
